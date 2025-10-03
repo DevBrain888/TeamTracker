@@ -9,7 +9,7 @@ class STaskAdd(BaseModel):
 class STask(STaskAdd):
     id: int
 
-    model_config = ConfigDict(from_attributees=True)
+    model_config = ConfigDict(from_attributes=True)
 
 class STaskId(BaseModel):
     ok: bool = True
