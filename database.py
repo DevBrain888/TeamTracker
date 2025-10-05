@@ -1,4 +1,7 @@
+import datetime
 from typing import Optional
+import datetime as dt
+from sqlalchemy import DateTime, func
 
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
@@ -17,6 +20,11 @@ class TaskOrm(Model):
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str]
     description: Mapped[Optional[str]]
+    status: Mapped[str]
+    created_at: Mapped[dt.datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now()
+    )
+    created_at: Mapped[datetime]
 
 async def create_tables():
     async with engine.begin() as conn:
